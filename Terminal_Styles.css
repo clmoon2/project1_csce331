@@ -1,0 +1,717 @@
+/* Terminal_Styles.css
+   Retro terminal aesthetic for student portfolio
+*/
+
+:root {
+  color-scheme: dark;
+  --terminal-bg: #000000;
+  --terminal-panel: #121212;
+  --terminal-outline: #0f3d0f;
+  --terminal-header: #1a1a1a;
+  --terminal-text: #00ff00;
+  --terminal-muted: #66ff66;
+  --terminal-accent: #39ff14;
+  --terminal-warning: #ffdd33;
+  --terminal-link: #9dff9d;
+  --terminal-shadow: rgba(0, 255, 0, 0.3);
+  --terminal-focus: rgba(0, 255, 128, 0.85);
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at top left, #111 0%, #000 55%, #000 100%);
+  color: var(--terminal-text);
+  font-family: "Courier New", Consolas, "Liberation Mono", "Lucida Console", Monaco, monospace;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 2rem);
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 255, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  mix-blend-mode: screen;
+  opacity: 0.35;
+  animation: scanlines 8s linear infinite;
+}
+
+body::after {
+  content: "student@portfolio — Terminal";
+  position: fixed;
+  top: clamp(0.4rem, 2vw, 1rem);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 1.5rem;
+  background: linear-gradient(to bottom, #222 0%, #111 100%);
+  color: var(--terminal-text);
+  border: 1px solid #0a0a0a;
+  border-bottom-color: #003300;
+  border-radius: 8px 8px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  box-shadow: 0 0 18px rgba(0, 255, 0, 0.25);
+  text-align: center;
+}
+
+body > header,
+body > main,
+body > footer {
+  background: var(--terminal-panel);
+  border: 1px solid var(--terminal-outline);
+  padding: clamp(1.5rem, 2vw, 2rem);
+  box-shadow: 0 0 18px rgba(0, 255, 0, 0.1), inset 0 0 0 1px rgba(0, 255, 0, 0.08);
+  position: relative;
+}
+
+body > header {
+  border-top: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: clamp(2.8rem, 3vw, 3.4rem);
+  background: radial-gradient(circle at top, rgba(57, 255, 20, 0.1) 0%, var(--terminal-panel) 75%);
+}
+
+body > footer {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: radial-gradient(circle at bottom, rgba(57, 255, 20, 0.08) 0%, var(--terminal-panel) 70%);
+}
+
+body > header::before {
+  content: "  _______               __         __          _           \A |__   __|             / _|       / _|        | |          \A    | | ___  _ __   ___| |_ ___  _| |_ ___  ___| |__   __ _ \A    | |/ _ \\| '_ \\ / _ \\  _/ _ \\|_   _/ _ \\/ __| '_ \\ / _` |\A    | | (_) | | | |  __/ || (_) | | ||  __/ (__| | | | (_| |\A    |_|\\___/|_| |_|\\___|_| \\___/  |_| \\___|\\___|_| |_|\\__,_|";
+  position: absolute;
+  top: clamp(0.9rem, 1vw, 1.5rem);
+  left: clamp(1rem, 2vw, 2.5rem);
+  white-space: pre;
+  font-size: clamp(0.35rem, 1vw, 0.55rem);
+  color: rgba(0, 255, 0, 0.6);
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.35);
+  pointer-events: none;
+}
+
+body > header::after {
+  content: "Boot sequence complete.";
+  position: absolute;
+  bottom: clamp(0.5rem, 2vw, 1.25rem);
+  right: clamp(1rem, 2vw, 2.5rem);
+  font-size: clamp(0.55rem, 1.3vw, 0.75rem);
+  color: rgba(102, 255, 102, 0.85);
+  animation: typewrite 6s steps(40) 0.5s forwards;
+  opacity: 0;
+}
+
+main {
+  border-top: 0;
+  border-bottom: 0;
+  background: linear-gradient(to bottom, rgba(9, 40, 9, 0.6), rgba(5, 20, 5, 0.9));
+}
+
+a {
+  color: var(--terminal-link);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(157, 255, 157, 0.6);
+  transition: color 0.2s ease, text-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--terminal-accent);
+  border-color: var(--terminal-accent);
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.8);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px dashed var(--terminal-focus);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(0, 255, 128, 0.2);
+}
+
+header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  text-align: center;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  text-shadow: 0 0 18px rgba(57, 255, 20, 0.4);
+  position: relative;
+}
+
+header h1::after {
+  content: "▊";
+  margin-left: 0.35rem;
+  animation: blink 1.05s steps(2, start) infinite;
+  color: var(--terminal-accent);
+}
+
+header p {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  text-align: center;
+  color: rgba(157, 255, 157, 0.9);
+  margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.4rem, 1.6vw, 1rem);
+  justify-content: center;
+}
+
+nav li {
+  position: relative;
+}
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(0, 30, 0, 0.65);
+  border: 1px solid rgba(0, 255, 0, 0.4);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(0, 255, 0, 0.25);
+  position: relative;
+}
+
+nav a::before {
+  content: "user@portfolio:~$";
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+nav a[aria-current="page"] {
+  background: rgba(57, 255, 20, 0.15);
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.35);
+}
+
+nav a span,
+nav a strong {
+  font-weight: 600;
+}
+
+#main {
+  display: block;
+}
+
+main section {
+  margin-bottom: clamp(2rem, 3vw, 3rem);
+  padding-left: clamp(1rem, 2vw, 2rem);
+  border-left: 2px solid rgba(0, 255, 0, 0.2);
+  position: relative;
+}
+
+main section::before {
+  content: "user@portfolio:~$ cat " attr(aria-labelledby);
+  position: absolute;
+  top: -1.25rem;
+  left: 0;
+  font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+  letter-spacing: 0.08em;
+  color: rgba(102, 255, 102, 0.8);
+}
+
+main h2 {
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 12px rgba(57, 255, 20, 0.35);
+  position: relative;
+}
+
+main h2::before {
+  content: "➜";
+  margin-right: 0.5rem;
+  color: var(--terminal-accent);
+}
+
+main p,
+main li {
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  color: rgba(157, 255, 157, 0.88);
+}
+
+main ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+main li::before {
+  content: "-";
+  display: inline-block;
+  width: 1rem;
+  color: var(--terminal-accent);
+}
+
+main p + p {
+  margin-top: 0.85rem;
+}
+
+main p a {
+  border-bottom-style: dashed;
+}
+
+footer {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(6, 24, 6, 0.95);
+}
+
+footer p {
+  color: rgba(102, 255, 102, 0.9);
+  text-align: center;
+}
+
+footer nav ul {
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+footer nav a::before {
+  content: "ls ";
+  color: rgba(102, 255, 102, 0.7);
+}
+
+footer nav a {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+[role="button"] {
+  background: rgba(0, 30, 0, 0.75);
+  color: var(--terminal-text);
+  border: 1px solid rgba(0, 255, 0, 0.4);
+  padding: 0.45rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0, 255, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+[role="button"]:hover {
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.4), inset 0 0 8px rgba(57, 255, 20, 0.35);
+  transform: translateY(-2px);
+}
+
+button::before,
+input[type="button"]::before,
+input[type="submit"]::before,
+[role="button"]::before {
+  content: "user@portfolio:~$";
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 0.7rem;
+  color: rgba(102, 255, 102, 0.8);
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: #003300;
+  color: var(--terminal-warning);
+  padding: 0.4rem 0.7rem;
+  border: 1px dashed rgba(255, 221, 51, 0.6);
+  text-decoration: none;
+  transform: translateY(-120%);
+  transition: transform 0.25s ease;
+  z-index: 3;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Terminal tables and lists */
+table,
+thead,
+tbody,
+th,
+tr,
+td {
+  border-color: rgba(0, 255, 0, 0.3);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+  background: rgba(0, 20, 0, 0.65);
+  box-shadow: inset 0 0 0 1px rgba(0, 255, 0, 0.25);
+}
+
+th,
+td {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  text-align: left;
+}
+
+th {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--terminal-link);
+}
+
+tbody tr:hover {
+  background: rgba(0, 50, 0, 0.45);
+}
+
+code,
+pre {
+  font-family: inherit;
+  background: rgba(0, 30, 0, 0.7);
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  color: var(--terminal-text);
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.35);
+}
+
+pre {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  position: relative;
+  margin: 1rem 0;
+}
+
+pre::before {
+  content: "cat output";
+  display: block;
+  font-size: 0.65rem;
+  margin-bottom: 0.35rem;
+  color: rgba(102, 255, 102, 0.7);
+}
+
+/* Accessibility and readability adjustments */
+::selection {
+  background: rgba(0, 255, 128, 0.35);
+  color: var(--terminal-text);
+}
+
+abbr[title] {
+  border-bottom: 1px dotted rgba(102, 255, 102, 0.7);
+  cursor: help;
+}
+
+hr {
+  border: none;
+  border-top: 1px dashed rgba(0, 255, 0, 0.2);
+  margin: 2rem 0;
+}
+
+blockquote {
+  border-left: 2px solid rgba(57, 255, 20, 0.6);
+  padding-left: 1rem;
+  color: rgba(157, 255, 157, 0.85);
+  font-style: italic;
+}
+
+/* Animations */
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100vh;
+  }
+}
+
+@keyframes typewrite {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes bootfade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header,
+main,
+footer,
+nav,
+section,
+article,
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+button,
+a,
+pre,
+code,
+blockquote,
+table {
+  animation: bootfade 0.6s ease-out both;
+}
+
+header {
+  animation-delay: 0.25s;
+}
+
+main {
+  animation-delay: 0.4s;
+}
+
+footer {
+  animation-delay: 0.55s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  body::after {
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+  }
+
+  header h1 {
+    letter-spacing: 0.2em;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  nav a {
+    justify-content: space-between;
+  }
+
+  main section {
+    padding-left: 1rem;
+  }
+
+  body > header::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Misc utilities */
+figcaption {
+  font-size: 0.75rem;
+  color: rgba(102, 255, 102, 0.75);
+  margin-top: 0.4rem;
+}
+
+figure {
+  border: 1px solid rgba(0, 255, 0, 0.25);
+  padding: 1rem;
+  background: rgba(0, 25, 0, 0.65);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
+  color: rgba(157, 255, 157, 0.85);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  background: rgba(0, 25, 0, 0.8);
+  color: var(--terminal-text);
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0, 255, 0, 0.2);
+}
+
+textarea {
+  min-height: 6rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(102, 255, 102, 0.6);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--terminal-accent);
+  box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.35);
+}
+
+ol {
+  margin-left: 1.5rem;
+}
+
+ol li {
+  margin-bottom: 0.4rem;
+}
+
+ol li::marker {
+  color: var(--terminal-accent);
+}
+
+small {
+  color: rgba(102, 255, 102, 0.75);
+}
+
+progress,
+meter {
+  width: 100%;
+  background-color: rgba(0, 25, 0, 0.6);
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  height: 1rem;
+}
+
+progress::-webkit-progress-bar,
+meter::-webkit-meter-bar {
+  background-color: rgba(0, 25, 0, 0.6);
+}
+
+progress::-webkit-progress-value {
+  background-image: linear-gradient(to right, rgba(57, 255, 20, 0.8), rgba(0, 255, 128, 0.8));
+}
+
+meter::-webkit-meter-optimum-value {
+  background-image: linear-gradient(to right, rgba(57, 255, 20, 0.9), rgba(0, 255, 128, 0.9));
+}
+
+meter::-webkit-meter-suboptimum-value {
+  background-image: linear-gradient(to right, rgba(255, 221, 51, 0.8), rgba(102, 255, 102, 0.8));
+}
+
+meter::-webkit-meter-even-less-good-value {
+  background-image: linear-gradient(to right, rgba(255, 102, 102, 0.8), rgba(255, 221, 51, 0.8));
+}
+
+fieldset {
+  border: 1px dashed rgba(0, 255, 0, 0.3);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+legend {
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(157, 255, 157, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Terminal cursor utility class */
+.cursor {
+  display: inline-block;
+  width: 0.65ch;
+  background: var(--terminal-accent);
+  animation: blink 1s steps(2, start) infinite;
+  margin-left: 0.1rem;
+  box-shadow: 0 0 6px rgba(57, 255, 20, 0.75);
+}
+
+/* Inline command prompt label */
+.prompt {
+  color: rgba(102, 255, 102, 0.85);
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+/* Terminal log styling */
+.log-output {
+  background: rgba(0, 25, 0, 0.7);
+  border: 1px solid rgba(0, 255, 0, 0.35);
+  padding: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  max-height: 18rem;
+  overflow-y: auto;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.log-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.log-output::-webkit-scrollbar-thumb {
+  background: rgba(57, 255, 20, 0.45);
+}
+
+.log-output::-webkit-scrollbar-track {
+  background: rgba(0, 20, 0, 0.4);
+}
